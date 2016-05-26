@@ -16,7 +16,7 @@ public final class Launcher {
     /**
      * port number for the jetty server.
      */
-    private static final int PORT = 8888;
+    private static final int PORT = 80;
 
     /**
      * Security scheme to use.
