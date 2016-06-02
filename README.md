@@ -9,7 +9,7 @@ to run (from /home/ec2-user folder on server): sudo java -cp lib/slf4j-log4j12-1
 
 ##Creating a new ec2 instance
 use AMI
-add an IAM role to ec2 instance (only allowed at instance creation time in the instance details section at review page)
+add log puller IAM role (already added correct policy for log pulling) to ec2 instance (only allowed at instance creation time in the instance details section at review page)
 associate the usual keypair with the host
 ssh to the host (if there are security issues, try deleting the IP address AND host DNS entries in ~/.ssh/known_hosts and try again
 > sudo mkdir /env
@@ -17,9 +17,12 @@ ssh to the host (if there are security issues, try deleting the IP address AND h
 > mkdir /env/masudio.com
 > mkdir /env/masudio.com/logs
 > mkdir /env/masudio.com/lib
-> {download slf4j-log4j correct version}
-see http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/QuickStartEC2Instance.html to install awslogs, copy the awslogs conf from repo resources/ and then use the wiki to find command to run to start it up
-> {copy awscli.conf and awslogs.conf}
+> {download slf4j-log4j correct version to /env/masudio.com/lib/}
+> sudo yum update -y
+> sudo yum install -y awslogs
+> {copy resources/awscli.conf /etc/awslogs/awscli.conf to and resources/awslogs.conf to  /etc/awslogs/awslogs.conf}
+> sudo service awslogs start
+> sudo chkconfig awslogs on
 > sudo yum install java-1.8.0
 > sudo yum remove java-1.7.0-openjdk
 Enter 'y' to say to do it...twice
@@ -31,9 +34,10 @@ check logs are showing up
 check logs are being pulled
 > sudo chkconfig awslogs on
 
-## TODO:
-Add a logpuller and log archiving (continued)
+##REFERENCES:
+http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/QuickStartEC2Instance.html to install awslogs, copy the awslogs conf from repo resources/
 
+## TODO:
 Add & configure SLF4J attributes support
 
 Add host memory metrics
