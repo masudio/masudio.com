@@ -1,17 +1,14 @@
+import lombok.extern.slf4j.Slf4j;
 import masudio.app.first.HelloServlet;
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 /**
  * Shared launcher for executing all sample skills within a single servlet container.
  */
+@Slf4j
 public final class Launcher {
-
-    private static final Logger log = LoggerFactory.getLogger(Launcher.class);
 
     /**
      * port number for the jetty server.
